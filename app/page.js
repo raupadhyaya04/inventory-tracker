@@ -9,6 +9,7 @@ import { collection, deleteDoc, doc, getDocs, getDoc, setDoc, query } from "fire
 export default function Home() {
   const [inventory, setInventory] = useState([])
   const [open, setOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('');
   const [itemName, setItemName] = useState('')
   const updateInventory = async () => {
     const snapshot = query(collection(firestore, 'inventory'))
@@ -108,11 +109,20 @@ export default function Home() {
       </Box>
       
     </Modal>
-    <Button variant="contained" onClick={() => {
-      handleOpen()
-    }}>
-      Add New Item
-    </Button>
+    <Stack width="100%" direction="row" spacing={2} justifyContent="center" display="flex" alignItems="center">
+      <Button variant="contained" onClick={() => {
+        handleOpen()
+      }}>
+        Add New Item
+      </Button>
+      <TextField
+      label="Search"
+      variant="outlined"
+      value={searchTerm}
+      width="200px"
+    />
+    </Stack>
+
     <Box border="1px solid #333">
       <Box width="800px" height="100px" display="flex" bgcolor="#ADD8E6" alignItems="center" justifyContent="center">
         <Typography variant="h2" color="#333">
